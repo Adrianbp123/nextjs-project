@@ -1,9 +1,22 @@
+import { fetchGames } from "@/lib/rawg";
 
 
-export default function Home() {
+export default async function Home() {
+  const data = await fetchGames();
+
+  console.log(data.results);
+
   return (
     <main>
-      <h1>Next.js project</h1>
+      <h1>Spilloversikt</h1>
+
+      <ul>
+        {data.results.map((game) => (
+          <li key={game.id}>
+              {game.name}
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
