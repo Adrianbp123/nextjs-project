@@ -9,3 +9,12 @@ export type Game = {
 export type GamesResponse = {
     results: Game[];
 };
+
+export type GameDetails = Game & {
+    description_raw: string;
+    released: string | null;
+    genres: {
+        id: number;
+        name: string;
+    }[];
+};
