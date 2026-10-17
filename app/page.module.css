@@ -1,0 +1,27 @@
+.page {
+    padding: 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gamesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .gamesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (min-width: 1200px) {
+    .gamesGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

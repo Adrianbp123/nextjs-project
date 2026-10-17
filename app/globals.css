@@ -1,5 +1,85 @@
+:root {
+  /* FARGER */
+  --bg-color: #0a0a0d;
+  --surface-color: #18181e;
+  --primary-color: #a78bfa;
+  --secondary-color: #27252f;
+  --text-color: #f5f5f7;
+  --muted-text: #9896a3;
+
+  /* KORT */
+  --card-radius: 0.8rem;
+
+  /* FONT */
+  --text-font:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* SKRIFTSTØRRELSER */
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-base: 1.125rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 2.5rem;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--text-font);
+  line-height: 1.5;
+}
+
+/* Markering ved tastaturnavigasjon */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* SKRIFTSTØRRELSER*/
+h1 {
+  font-size: var(--text-3xl);
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+h4 {
+  font-size: var(--text-lg);
+}
+
+p {
+  font-size: var(--text-base);
 }
