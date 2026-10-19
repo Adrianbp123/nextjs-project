@@ -13,14 +13,19 @@ if (!apiKey) {
  * Henter spill fra RAWG API-et.
  * 
  * @param search Søketeksten som sendes til API-et
+ * @param genre Sjangeren spillene skal filtreres etter.
  * @returns En liste med spill fra API-et
  */
 
-export async function fetchGames(search?:string): Promise<GamesResponse> {
+export async function fetchGames(
+    search?:string,
+    genre?: string
+   ): Promise<GamesResponse> {
 
     const response = await fetch(
-        `${BASE_URL}/games?key=${apiKey}&page_size=10${search ?
-            `&search=${encodeURIComponent(search)}` : ""}`
+        `${BASE_URL}/games?key=${apiKey}&page_size=10` +
+        `${search ? `&search=${encodeURIComponent(search)}` : ""}` +
+        `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}`
     );
 
     if (!response.ok) {

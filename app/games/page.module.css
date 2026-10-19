@@ -7,6 +7,7 @@
 
 .searchForm {
     display: flex;
+    flex-direction: column;
     gap: 0.8rem;
     margin: 1.5rem 0;
 }
@@ -37,4 +38,21 @@
 
 .searchButton:hover {
     opacity: 0.7;
+}
+
+
+.genreSelect {
+    padding: 0.8rem 1rem;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+
+@media (min-width: 768px) {
+    .searchForm {
+        flex-direction: row;
+    }
 }

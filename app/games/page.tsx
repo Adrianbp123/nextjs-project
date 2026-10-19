@@ -5,6 +5,7 @@ import styles from "./page.module.css"
 type GamesPageProps = {
     searchParams: Promise<{
         search?:string;
+        genre?: string;
     }>;
 };
 
@@ -16,7 +17,7 @@ type GamesPageProps = {
  */
 
 export default async function GamesPage({ searchParams }: GamesPageProps) {
-    const { search } = await searchParams;
+    const { search, genre } = await searchParams;
     const data = await fetchGames(search);
     
 
@@ -32,6 +33,20 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
            placeholder="Søk etter spill..."
            defaultValue={search ?? ""} 
            />
+
+           <select 
+           className={styles.genreSelect}
+           name="genre" 
+           defaultValue={genre ?? ""}>
+            <option value="">Alle sjangere</option>
+            <option value="action">Action</option>
+            <option value="role-playing-games-rpg">RPG</option>
+            <option value="adventure">Adventure</option>
+            <option value="shooter">Shooter</option>
+           </select>
+
+
+
            <button className={styles.searchButton} type="submit">
             Søk
            </button>
