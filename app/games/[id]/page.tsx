@@ -7,6 +7,12 @@ type GamePageProps = {
     }>;
 };
 
+/**
+ * Henter og viser informasjon om et bestemt spill.
+ * 
+ * @param props.params URL-parametere som inneholder spillets ID.
+ * @returns En detaljside med informasjon om spillet.
+ */
 export default async function GamePage({ params }: GamePageProps) {
     const { id } = await params;
     const gameId = Number(id);

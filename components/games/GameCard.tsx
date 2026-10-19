@@ -7,6 +7,13 @@ type GameCardProps = {
     game: Game;
 };
 
+
+/**
+ * Viser et spillkort med bilde, navn og rating
+ * 
+ * @param props.game Spillet som skal vises.
+ * @returns Et spillkort med informasjon om spillet.
+ */
 export default function GameCard({ game }: GameCardProps) {
     return (
         <article className={styles.card}>

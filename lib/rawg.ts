@@ -9,10 +9,18 @@ if (!apiKey) {
         throw new Error("RAWG API-nøkkel mangler")
     }
 
-export async function fetchGames(): Promise<GamesResponse> {
+/**
+ * Henter spill fra RAWG API-et.
+ * 
+ * @param search Søketeksten som sendes til API-et
+ * @returns En liste med spill fra API-et
+ */
+
+export async function fetchGames(search?:string): Promise<GamesResponse> {
 
     const response = await fetch(
-        `${BASE_URL}/games?key=${apiKey}&page_size=10`
+        `${BASE_URL}/games?key=${apiKey}&page_size=10${search ?
+            `&search=${encodeURIComponent(search)}` : ""}`
     );
 
     if (!response.ok) {
@@ -24,6 +32,12 @@ export async function fetchGames(): Promise<GamesResponse> {
     return data;
 }
 
+/**
+ * Henter informasjon om ett spill fra RAWG API-et
+ * 
+ * @param id ID-en til spillet som skal hentes.
+ * @returns Informasjon om spillet, eller null hvis spillet ikke finnes.
+ */
 
 export async function fetchGameById(id: number): Promise<GameDetails | null> {
     
