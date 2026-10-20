@@ -6,6 +6,7 @@ type GamesPageProps = {
     searchParams: Promise<{
         search?:string;
         genre?: string;
+        ordering?: string;
     }>;
 };
 
@@ -17,8 +18,8 @@ type GamesPageProps = {
  */
 
 export default async function GamesPage({ searchParams }: GamesPageProps) {
-    const { search, genre } = await searchParams;
-    const data = await fetchGames(search);
+    const { search, genre, ordering } = await searchParams;
+    const data = await fetchGames(search, genre, ordering);
     
 
     return (
@@ -35,7 +36,7 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
            />
 
            <select 
-           className={styles.genreSelect}
+           className={styles.filterSelect}
            name="genre" 
            defaultValue={genre ?? ""}>
             <option value="">Alle sjangere</option>
@@ -43,6 +44,21 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
             <option value="role-playing-games-rpg">RPG</option>
             <option value="adventure">Adventure</option>
             <option value="shooter">Shooter</option>
+           </select>
+
+           <select 
+           className={styles.filterSelect} 
+           name="ordering" 
+           defaultValue={ordering ?? ""}>
+
+            <option value="">Standard sortering</option>
+            <option value="-rating">Høyest rating</option>
+            <option value="-released">Nyeste først</option>
+            <option value="name">Navn A-Å</option>
+
+
+
+
            </select>
 
 

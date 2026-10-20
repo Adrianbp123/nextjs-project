@@ -14,18 +14,21 @@ if (!apiKey) {
  * 
  * @param search Søketeksten som sendes til API-et
  * @param genre Sjangeren spillene skal filtreres etter.
+ * @param ordering Hvordan spillene skal sorteres.
  * @returns En liste med spill fra API-et
  */
 
 export async function fetchGames(
     search?:string,
-    genre?: string
+    genre?: string,
+    ordering?: string
    ): Promise<GamesResponse> {
 
     const response = await fetch(
         `${BASE_URL}/games?key=${apiKey}&page_size=10` +
         `${search ? `&search=${encodeURIComponent(search)}` : ""}` +
-        `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}`
+        `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
+        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
     );
 
     if (!response.ok) {

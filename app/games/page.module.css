@@ -41,7 +41,7 @@
 }
 
 
-.genreSelect {
+.filterSelect {
     padding: 0.8rem 1rem;
     background-color: var(--surface-color);
     color: var(--text-color);
@@ -56,3 +56,4 @@
         flex-direction: row;
     }
 }
+
