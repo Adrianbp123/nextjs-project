@@ -1,0 +1,29 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem;
+}
+
+
+.pageLink {
+    padding: 0.8rem 1rem;
+
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.5rem;
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.pageLink:hover {
+    border-color: var(--primary-color);
+}
+
+.pageNumber {
+    color: var(--muted-text);
+    white-space: nowrap;
+}

@@ -1,25 +1,35 @@
 import { fetchGames } from "@/lib/rawg";
 import GameGrid from "@/components/games/GameGrid";
 import styles from "./page.module.css"
+import Pagination from "@/components/games/Pagination";
 
 type GamesPageProps = {
     searchParams: Promise<{
         search?:string;
         genre?: string;
         ordering?: string;
+        page?: string;
     }>;
 };
 
 /**
- * Henter og viser spill fra RAWG API-et med mulighet for å søke.
+ * Henter og viser spill fra RAWG API-et med søk, filtrering,
+ * sortering og paginering.
  * 
- * @param props.searchParams URL-parametere som brukes til å hente søketeksten.
+ * @param props.searchParams URL-parametere som brukes for søk,
+ * sjanger, sortering og sidetall
  * @returns En side med søkefelt og spilloversikt
  */
 
 export default async function GamesPage({ searchParams }: GamesPageProps) {
-    const { search, genre, ordering } = await searchParams;
-    const data = await fetchGames(search, genre, ordering);
+    const { search, genre, ordering, page } = await searchParams;
+
+    const parsedPage = Number(page);
+    const pageNumber =
+    Number.isSafeInteger(parsedPage) && parsedPage > 0
+    ? parsedPage: 1;
+
+    const data = await fetchGames(search, genre, ordering, pageNumber);
     
 
     return (
@@ -71,7 +81,17 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
         {data.results.length === 0 && (
             <p>Fant ingen spill som matcher søket ditt.</p>
         )}
+
             <GameGrid games={data.results} />
+
+            <Pagination 
+            page={pageNumber}
+            hasNext={data.next !== null}
+            hasPrevious={pageNumber > 1}
+            search={search}
+            genre={genre}
+            ordering={ordering}
+            />
         </main>
     );
 }
