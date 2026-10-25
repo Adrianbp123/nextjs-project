@@ -8,6 +8,8 @@ export type Game = {
 
 export type GamesResponse = {
     results: Game[];
+    next: string | null;
+    previous: string | null;
 };
 
 export type GameDetails = Game & {

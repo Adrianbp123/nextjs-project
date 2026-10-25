@@ -10,22 +10,25 @@ if (!apiKey) {
     }
 
 /**
- * Henter spill fra RAWG API-et.
+ * Henter spill fra RAWG API-et med 10 spill per side.
+ * Støtter søk,filtrering, sortering og paginering
  * 
- * @param search Søketeksten som sendes til API-et
+ * @param search Søketeksten som sendes til API-et.
  * @param genre Sjangeren spillene skal filtreres etter.
  * @param ordering Hvordan spillene skal sorteres.
+ * @param page Sidetallet som skal hentes.
  * @returns En liste med spill fra API-et
  */
 
 export async function fetchGames(
     search?:string,
     genre?: string,
-    ordering?: string
+    ordering?: string,
+    page: number = 1
    ): Promise<GamesResponse> {
 
     const response = await fetch(
-        `${BASE_URL}/games?key=${apiKey}&page_size=10` +
+        `${BASE_URL}/games?key=${apiKey}&page_size=10&page=${page}` +
         `${search ? `&search=${encodeURIComponent(search)}` : ""}` +
         `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
         `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
