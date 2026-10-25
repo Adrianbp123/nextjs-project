@@ -29,7 +29,7 @@ export default function GameCard({ game }: GameCardProps) {
             )}
             <div className={styles.content}>
             <h2 className={styles.title}>{game.name}</h2>
-            <p className={styles.rating}>Rating: {game.rating}</p>
+            <p className={styles.rating}>☆ {game.rating}</p>
             </div>
             </Link>
         </article>

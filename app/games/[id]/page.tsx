@@ -1,5 +1,9 @@
 import { fetchGameById } from "@/lib/rawg";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import styles from "./page.module.css"
+
+
 
 type GamePageProps = {
     params: Promise<{
@@ -27,13 +31,49 @@ export default async function GamePage({ params }: GamePageProps) {
         notFound();
     }
 
+
+
     return (
         <main>
-            <h1>{game.name}</h1>
+            <h1 className={styles.gameTitle}>{game.name}</h1>
 
-            <p>Rating: {game.rating}</p>
-            <p>Release date: {game.released}</p>
-            <p>{game.description_raw}</p>
+        <div className={styles.hero}>
+            {game.background_image && (
+                <Image
+                src={game.background_image}
+                alt={`Bilde fra ${game.name}`}
+                fill
+                sizes="100vw"
+                className={styles.heroImage}
+                 />
+            )}
+        </div>
+
+<div className={styles.gameContent}>
+
+        <div className={styles.gameMeta}>
+            <span className={styles.rating}>☆ {game.rating} / 5</span>
+            <span className={styles.released}>Released: {game.released}</span>
+        </div>
+
+        <div className={styles.genres}>
+            {game.genres.map((genre) => (
+                <span key={genre.id}>{genre.name}</span>
+            ))}
+        </div>
+
+        <div className={styles.description}>
+            <h2>About the game</h2>
+            <p>{game.description_raw.split("Español")[0]}</p>
+            
+        </div>
+
+</div>
+
+
+        
+            
         </main>
     )
 }
+
