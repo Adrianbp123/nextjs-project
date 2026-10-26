@@ -44,10 +44,19 @@ html {
 }
 
 body {
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--text-font);
   line-height: 1.5;
+}
+
+main {
+  flex: 1;
 }
 
 /* Markering ved tastaturnavigasjon */
