@@ -28,7 +28,7 @@ export async function fetchGames(
    ): Promise<GamesResponse> {
 
     const response = await fetch(
-        `${BASE_URL}/games?key=${apiKey}&page_size=10&page=${page}` +
+        `${BASE_URL}/games?key=${apiKey}&page_size=12&page=${page}` +
         `${search ? `&search=${encodeURIComponent(search)}` : ""}` +
         `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
         `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
