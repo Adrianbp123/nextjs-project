@@ -1,6 +1,8 @@
 .header {
     background-color: var(--surface-color);
     padding: 1rem;
+    position: relative;
+    z-index: 1;
 
 }
 

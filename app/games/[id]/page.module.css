@@ -33,7 +33,7 @@
 
 .heroImage {
     object-fit: cover;
-    object-position: center top;
+    object-position: center 40%;
     mask-image: linear-gradient(
         to bottom,
         transparent 0%,
