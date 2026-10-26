@@ -34,7 +34,19 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
 
     return (
         <main className={styles.page}>
-            <h1>Alle spill</h1>
+            <section className={styles.intro}>
+    <video
+    className={styles.backgroundVideo}
+    autoPlay
+    muted
+    loop
+    playsInline
+    aria-hidden="true"
+  >
+    <source src="/bgvideo.mp4" type="video/mp4" />
+  </video>
+            <h1>Utforsk spill</h1>
+            </section>
 
         <form action="/games" method="GET" className={styles.searchForm}>
          <input
