@@ -34,9 +34,10 @@
 }
 
 .title {
-    font-size: var(--text-xl)
+    font-size: var(--text-xl);
 }
 
 .rating {
-    color: var(--primary-color)
+    color: var(--primary-color);
+    
 }
