@@ -69,9 +69,6 @@ export default async function GamePage({ params }: GamePageProps) {
         </div>
 
 </div>
-
-
-        
             
         </main>
     )
