@@ -12,6 +12,11 @@
     border-color: var(--primary-color);
 }
 
+.card:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
 .image {
     display: block;
     width: 100%;
@@ -25,10 +30,14 @@
     text-decoration: none;
 }
 
+.link:focus-visible {
+    outline: none;
+}
+
 .content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
 }
@@ -39,5 +48,6 @@
 
 .rating {
     color: var(--primary-color);
+    white-space: nowrap;
     
 }
