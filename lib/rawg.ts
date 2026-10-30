@@ -10,7 +10,7 @@ if (!apiKey) {
     }
 
 /**
- * Henter spill fra RAWG API-et med 10 spill per side.
+ * Henter spill fra RAWG API-et med max 12 spill per side.
  * Støtter søk,filtrering, sortering og paginering
  * 
  * @param search Søketeksten som sendes til API-et.
@@ -29,9 +29,9 @@ export async function fetchGames(
 
     const response = await fetch(
         `${BASE_URL}/games?key=${apiKey}&page_size=12&page=${page}` +
-        `${search ? `&search=${encodeURIComponent(search)}` : ""}` +
+        `${search ? `&search=${encodeURIComponent(search)}&search_precise=true` : ""}` +
         `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
-        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
+        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` :""}`
     );
 
     if (!response.ok) {
@@ -39,6 +39,8 @@ export async function fetchGames(
     }
 
     const data: GamesResponse = await response.json();
+// filtrerer bort spill uten rating
+    data.results = data.results.filter((game) => game.rating > 0);
 
     return data;
 }
