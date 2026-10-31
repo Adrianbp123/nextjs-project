@@ -1,119 +1,111 @@
 import { fetchGames } from "@/lib/rawg";
 import GameGrid from "@/components/games/GameGrid";
-import styles from "./page.module.css"
+import styles from "./page.module.css";
 import Pagination from "@/components/games/Pagination";
 
 type GamesPageProps = {
-    searchParams: Promise<{
-        search?:string;
-        genre?: string;
-        ordering?: string;
-        page?: string;
-    }>;
+  searchParams: Promise<{
+    search?: string;
+    genre?: string;
+    ordering?: string;
+    page?: string;
+  }>;
 };
 
 /**
  * Henter og viser spill fra RAWG API-et med søk, filtrering,
  * sortering og paginering.
- * 
+ *
  * @param props.searchParams URL-parametere som brukes for søk,
  * sjanger, sortering og sidetall
  * @returns En side med søkefelt og spilloversikt
  */
 
 export default async function GamesPage({ searchParams }: GamesPageProps) {
-    const { search, genre, ordering, page } = await searchParams;
+  const { search, genre, ordering, page } = await searchParams;
 
-    const parsedPage = Number(page);
-    const pageNumber =
-    Number.isSafeInteger(parsedPage) && parsedPage > 0
-    ? parsedPage: 1;
+  const parsedPage = Number(page);
+  const pageNumber =
+    Number.isSafeInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 
-    const data = await fetchGames(search, genre, ordering, pageNumber);
-    
+  const data = await fetchGames(search, genre, ordering, pageNumber);
 
-    return (
-        <main className={styles.page}>
-            <section className={styles.intro}>
-    <video
-    className={styles.backgroundVideo}
-    autoPlay
-    muted
-    loop
-    playsInline
-    aria-hidden="true"
-  >
-    <source src="/bgvideo.mp4" type="video/mp4" />
-  </video>
-            <h1>Utforsk spill</h1>
-            </section>
+  return (
+    <main className={styles.page}>
+      <section className={styles.intro}>
+        <video
+          className={styles.backgroundVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        >
+          <source src="/bgvideo.mp4" type="video/mp4" />
+        </video>
+        <h1>Utforsk spill</h1>
+      </section>
 
-        <form action="/games" method="GET" className={styles.searchForm}>
-         <input
-           className={styles.searchInput}
-           type="search"
-           name="search"
-           aria-label="Søk etter spill"
-           placeholder="Søk etter spill..."
-           defaultValue={search ?? ""} 
-           />
+      <form action="/games" method="GET" className={styles.searchForm}>
+        <input
+          className={styles.searchInput}
+          type="search"
+          name="search"
+          aria-label="Søk etter spill"
+          placeholder="Søk etter spill..."
+          defaultValue={search ?? ""}
+        />
 
-           <select 
-           className={styles.filterSelect}
-           name="genre"
-           aria-label="Filtrer etter sjanger"
-           defaultValue={genre ?? ""}>
-            <option value="">Alle sjangere</option>
-            <option value="action">Action</option>
-            <option value="role-playing-games-rpg">RPG</option>
-            <option value="adventure">Adventure</option>
-            <option value="shooter">Shooter</option>
-           </select>
+        <select
+          className={styles.filterSelect}
+          name="genre"
+          aria-label="Filtrer etter sjanger"
+          defaultValue={genre ?? ""}
+        >
+          <option value="">Alle sjangere</option>
+          <option value="action">Action</option>
+          <option value="role-playing-games-rpg">RPG</option>
+          <option value="adventure">Adventure</option>
+          <option value="shooter">Shooter</option>
+        </select>
 
-           <select 
-           className={styles.filterSelect} 
-           name="ordering" 
-           aria-label="Sorter spill"
-           defaultValue={ordering ?? ""}>
+        <select
+          className={styles.filterSelect}
+          name="ordering"
+          aria-label="Sorter spill"
+          defaultValue={ordering ?? ""}
+        >
+          <option value="">Standard sortering</option>
+          <option value="-rating">Høyest rating</option>
+          <option value="-released">Nyeste først</option>
+          <option value="name">Navn A-Å</option>
+        </select>
 
-            <option value="">Standard sortering</option>
-            <option value="-rating">Høyest rating</option>
-            <option value="-released">Nyeste først</option>
-            <option value="name">Navn A-Å</option>
+        <button className={styles.searchButton} type="submit">
+          Søk
+        </button>
+      </form>
 
+      {ordering && (
+        <p className={styles.filterInfo}>
+          Viser kun spill med Metacritic-score når sortering er aktivert.
+        </p>
+      )}
 
+      {data.results.length === 0 && (
+        <p>Fant ingen spill som matcher søket ditt.</p>
+      )}
 
+      <GameGrid games={data.results} />
 
-           </select>
-
-
-
-           <button className={styles.searchButton} type="submit">
-            Søk
-           </button>
-        </form>
-        
-        {ordering && (
-            <p className={styles.filterInfo}>
-                Viser kun spill med Metacritic-score når sortering
-                er aktivert.
-            </p>
-        )}
-
-        {data.results.length === 0 && (
-            <p>Fant ingen spill som matcher søket ditt.</p>
-        )}
-
-            <GameGrid games={data.results} />
-
-            <Pagination 
-            page={pageNumber}
-            hasNext={data.next !== null}
-            hasPrevious={pageNumber > 1}
-            search={search}
-            genre={genre}
-            ordering={ordering}
-            />
-        </main>
-    );
+      <Pagination
+        page={pageNumber}
+        hasNext={data.next !== null}
+        hasPrevious={pageNumber > 1}
+        search={search}
+        genre={genre}
+        ordering={ordering}
+      />
+    </main>
+  );
 }

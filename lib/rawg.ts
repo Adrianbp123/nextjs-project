@@ -2,18 +2,17 @@ import "server-only";
 import type { GamesResponse, GameDetails } from "@/types/game";
 import { notFound } from "next/navigation";
 
-
 const BASE_URL = "https://api.rawg.io/api";
 const apiKey = process.env.RAWG_API_KEY;
 
 if (!apiKey) {
-        throw new Error("RAWG API-nøkkel mangler")
-    }
+  throw new Error("RAWG API-nøkkel mangler");
+}
 
 /**
  * Henter 12 spill per side fra RAWG API-et
  * Støtter søk,filtrering, sortering og paginering
- * 
+ *
  * @param search Søketeksten som sendes til API-et.
  * @param genre Sjangeren spillene skal filtreres etter.
  * @param ordering Hvordan spillene skal sorteres.
@@ -22,58 +21,51 @@ if (!apiKey) {
  */
 
 export async function fetchGames(
-    search?:string,
-    genre?: string,
-    ordering?: string,
-    page: number = 1
-   ): Promise<GamesResponse> {
+  search?: string,
+  genre?: string,
+  ordering?: string,
+  page: number = 1,
+): Promise<GamesResponse> {
+  const response = await fetch(
+    `${BASE_URL}/games?key=${apiKey}&page_size=12&page=${page}` +
+      `${search ? `&search=${encodeURIComponent(search)}&search_precise=true` : ""}` +
+      `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
+      `${ordering ? "&metacritic=1,100" : ""}` +
+      `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`,
+  );
 
-    const response = await fetch(
-        `${BASE_URL}/games?key=${apiKey}&page_size=12&page=${page}` +
+  if (response.status === 404) {
+    notFound();
+  }
 
-        `${search ? `&search=${encodeURIComponent(search)}&search_precise=true` : ""}` +
-        `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
-        `${ordering ? "&metacritic=1,100" : ""}` +
-        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
-    );
+  if (!response.ok) {
+    throw new Error("Kunne ikke hente spill fra RAWG");
+  }
 
-    if (response.status === 404) {
-        notFound();
-    }
+  const data: GamesResponse = await response.json();
 
-    if (!response.ok) {
-        throw new Error("Kunne ikke hente spill fra RAWG");
-    }
-
-    const data: GamesResponse = await response.json();
-    
-
-    return data;
+  return data;
 }
 
 /**
  * Henter informasjon om ett spill fra RAWG API-et
- * 
+ *
  * @param id ID-en til spillet som skal hentes.
  * @returns Informasjon om spillet, eller null hvis spillet ikke finnes.
  */
 
 export async function fetchGameById(id: number): Promise<GameDetails | null> {
-    
-    const response = await fetch(
-        `${BASE_URL}/games/${id}?key=${apiKey}`
-    );
+  const response = await fetch(`${BASE_URL}/games/${id}?key=${apiKey}`);
 
-    if (response.status === 404) {
-        return null;
-    }
+  if (response.status === 404) {
+    return null;
+  }
 
-    if (!response.ok) {
-        throw new Error("Kunne ikke hente spillet fra RAWG");
-    }
+  if (!response.ok) {
+    throw new Error("Kunne ikke hente spillet fra RAWG");
+  }
 
-    const data: GameDetails = await response.json();
+  const data: GameDetails = await response.json();
 
-    return data;
-    
+  return data;
 }

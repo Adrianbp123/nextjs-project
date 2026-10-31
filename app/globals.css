@@ -12,8 +12,7 @@
   --card-radius: 0.8rem;
 
   /* FONT */
-  --text-font:
-    var(--font-geist-sans), sans-serif;
+  --text-font: var(--font-geist-sans), sans-serif;
 
   /* SKRIFTSTØRRELSER */
   --text-base: 1rem;
@@ -45,7 +44,6 @@ html {
 }
 
 body {
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
