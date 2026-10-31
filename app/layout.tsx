@@ -6,8 +6,8 @@ import "./globals.css";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  variable: "--font-logo"
-})
+  variable: "--font-logo",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,20 +27,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SpillCave",
-  description: "Utforsk spill, oppdag nye favoritter og finn spillinformasjon med RAWG API",
+  description:
+    "Utforsk spill, oppdag nye favoritter og finn spillinformasjon med RAWG API",
 };
-
 
 /**
  * Nettsidens hovedlayout med header, innhold og footer
- * 
+ *
  * @param children Innholdet fra siden
  * @returns JSX for nettsidens hovedlayout
  */
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="no" className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${silkscreen.variable}`}>
+    <html
+      lang="no"
+      className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${silkscreen.variable}`}
+    >
       <body>
         <Header />
         {children}
