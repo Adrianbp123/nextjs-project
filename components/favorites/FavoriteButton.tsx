@@ -30,8 +30,8 @@ export default function FavoriteButton({ game }: FavoriteButtonProps) {
         className={styles.favoriteButton}
         onClick={() => toggleFavorite(game)}
         aria-pressed={isFavorite}
-        aria-label={isFavorite ? "Fjern fra favoritter" :
-            "Legg til i favoritter"
+        aria-label={isFavorite ? `Fjern ${game.name} fra favoritter`
+        :`Legg til ${game.name} favoritter`
         }
         >
             {isFavorite ? "♥" : "♡"}

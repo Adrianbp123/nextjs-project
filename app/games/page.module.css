@@ -79,6 +79,12 @@
     cursor: pointer;
 }
 
+.filterInfo {
+    color: var(--muted-text);
+    margin: 1rem;
+    font-size: 0.85rem;
+}
+
 
 @media (min-width: 768px) {
     .searchForm {
