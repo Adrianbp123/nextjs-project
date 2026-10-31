@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./GameCard.module.css"
 import FavoriteButton from "../favorites/FavoriteButton";
+import { Star } from "lucide-react"
 
 type GameCardProps = {
     game: Game;
@@ -30,7 +31,7 @@ export default function GameCard({ game }: GameCardProps) {
             )}
             <div className={styles.content}>
             <h2 className={styles.title}>{game.name}</h2>
-            <p className={styles.rating}>☆ {game.rating}</p>
+            <p className={styles.rating}><Star size={16} fill="currentColor" aria-hidden="true" /> {game.rating}</p>
             </div>
             </Link>
             <div className={styles.favoritePosition}>

@@ -3,6 +3,7 @@
 import { useFavoritesStore } from "@/store/useFavoritesStore";
 import styles from "./FavoriteButton.module.css";
 import type { Game } from "@/types/game";
+import { Heart } from "lucide-react";
 
 
 type FavoriteButtonProps = {
@@ -34,7 +35,11 @@ export default function FavoriteButton({ game }: FavoriteButtonProps) {
         :`Legg til ${game.name} favoritter`
         }
         >
-            {isFavorite ? "♥" : "♡"}
+            <Heart
+            size={16}
+            fill={isFavorite ? "currentColor" : "none"}
+            aria-hidden="true"
+            />
         </button>
     )
 }
