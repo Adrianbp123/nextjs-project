@@ -6,18 +6,39 @@
     overflow: hidden;
 }
 
-.gameTitle {
-    color: var(--primary-color);
+.titleWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
     background: linear-gradient(
         to bottom,
         #683a9322 10%,
         transparent 100%
     );
+
+    margin-bottom: 1rem;
+    padding-inline: 1rem;
+
+}
+
+.gameTitle {
+    color: var(--primary-color);
+    grid-column: 2;
     text-align: center;
     padding: 1.5rem 1rem;
+    animation: titleReveal 1s ease-out both;
 
+   
+}
+
+.favoriteButton {
     animation: titleReveal 1s ease-out both;
 }
+
+
+
 
 @keyframes titleReveal {
     from {
@@ -123,6 +144,7 @@
         padding: 0.6rem 1.2rem;
         
     }
+
 
 
 }

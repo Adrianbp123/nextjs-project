@@ -2,6 +2,7 @@ import type { Game } from "@/types/game";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./GameCard.module.css"
+import FavoriteButton from "../favorites/FavoriteButton";
 
 type GameCardProps = {
     game: Game;
@@ -32,6 +33,9 @@ export default function GameCard({ game }: GameCardProps) {
             <p className={styles.rating}>☆ {game.rating}</p>
             </div>
             </Link>
+            <div className={styles.favoritePosition}>
+            <FavoriteButton gameId={game.id} />
+            </div>
         </article>
     );
 }
