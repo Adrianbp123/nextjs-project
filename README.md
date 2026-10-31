@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SpillCave
 
-## Getting Started
+## Om SpillCave
 
-First, run the development server:
+SpillCave er en nettside for spillinteresserte som ønsker å oppdage nye spill og finne informasjon om dem. Prosjektet er utviklet som en skoleoppgave med Next.js, TypeScript og CSS Modules.
+
+Spillinformasjon er hentet fra RAWG API.
+
+## Funksjonalitet
+
+- Forside med 12 utvalgte spill
+- Søke etter spill.
+- Filtrere spill etter sjanger.
+- Sortere spill etter rating, utgivelsesdato og navn.
+- Bla mellom resultatsider med paginering.
+- Se informasjon om hvert spill.
+- Legge til og fjerne spill fra favoritter.
+
+## Teknologier
+
+- Next.js
+- React
+- TypeScript
+- CSS Modules
+- Zustand
+- RAWG API
+
+## Installasjon og kjøring
+
+1. Klon prosjektet:
+
+```bash
+git clone https://github.com/Adrianbp123/nextjs-project.git
+```
+
+2. Gå inn i prosjektmappen:
+
+```bash
+cd nextjs-project
+```
+
+3. Installer avhengighetene:
+
+```bash
+npm install
+```
+
+4. Opprett en fil som heter .env.local i prosjektets rotmappe, og legg inn API-nøkkelen:
+
+```env
+RAWG_API_KEY=din_api_nøkkel
+```
+
+5. Start utviklingsserveren:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Åpne `http://localhost:3000` i nettleseren.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API og konfigurasjon
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+SpillCave bruker RAWG API for å hente informasjon om spill. I prosjektet brukes det til å hente navn, bilder, rating, sjanger og beskrivelse.
 
-## Learn More
+API-kallene gjøres på serversiden i `lib/rawg.ts.` API-nøkkelen lagres i .env.local og leses gjennom miljøvariabelen RAWG_API_KEY.
 
-To learn more about Next.js, take a look at the following resources:
+## Kjente begrensninger
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- søkeresultatene er avhengige av RAWG API og kan noen ganger vise lite relevante spill.
+- For å begrense slike resultater filtreres spill uten Metacritic-score bort når sortering er aktivert. Dette kan gi bedre resultater, men enkelte spill kan fortsatt mangle.
+- Favoritter lagres kun lokalt i nettleseren.
+- Enkelte spill kan mangle bilde eller informasjon fra RAWG API.
