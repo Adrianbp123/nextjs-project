@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css"
 import FavoriteButton from "@/components/favorites/FavoriteButton";
+import { Star } from "lucide-react"
 
 
 
@@ -58,7 +59,7 @@ export default async function GamePage({ params }: GamePageProps) {
 <div className={styles.gameContent}>
 
         <div className={styles.gameMeta}>
-            <span className={styles.rating}>☆ {game.rating} / 5</span>
+            <span className={styles.rating}><Star size={18} fill="currentColor" aria-hidden="true" />{game.rating} / 5</span>
             <span className={styles.released}>Utgivelsesdato: {game.released}</span>
         </div>
 

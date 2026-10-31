@@ -51,6 +51,9 @@
 .rating {
     color: var(--primary-color);
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .favoritePosition {
