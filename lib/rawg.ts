@@ -1,5 +1,6 @@
 import "server-only";
 import type { GamesResponse, GameDetails } from "@/types/game";
+import { notFound } from "next/navigation";
 
 
 const BASE_URL = "https://api.rawg.io/api";
@@ -10,7 +11,7 @@ if (!apiKey) {
     }
 
 /**
- * Henter spill fra RAWG API-et med max 12 spill per side.
+ * Henter 12 spill per side fra RAWG API-et
  * Støtter søk,filtrering, sortering og paginering
  * 
  * @param search Søketeksten som sendes til API-et.
@@ -29,18 +30,23 @@ export async function fetchGames(
 
     const response = await fetch(
         `${BASE_URL}/games?key=${apiKey}&page_size=12&page=${page}` +
+
         `${search ? `&search=${encodeURIComponent(search)}&search_precise=true` : ""}` +
         `${genre ? `&genres=${encodeURIComponent(genre)}` : ""}` +
-        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` :""}`
+        `${ordering ? "&metacritic=1,100" : ""}` +
+        `${ordering ? `&ordering=${encodeURIComponent(ordering)}` : ""}`
     );
+
+    if (response.status === 404) {
+        notFound();
+    }
 
     if (!response.ok) {
         throw new Error("Kunne ikke hente spill fra RAWG");
     }
 
     const data: GamesResponse = await response.json();
-// filtrerer bort spill uten rating
-    data.results = data.results.filter((game) => game.rating > 0);
+    
 
     return data;
 }
