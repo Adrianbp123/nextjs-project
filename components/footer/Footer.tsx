@@ -17,6 +17,7 @@ export default function Footer () {
                 <nav className={styles.nav} aria-label="Bunnmeny">
                 <Link href="/">Forside</Link>
                 <Link href="/games">Spill</Link>
+                <Link href="/favorites">Favoritter</Link>
                 <Link href="/about">Om</Link>
                 </nav>
 

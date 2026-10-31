@@ -53,13 +53,15 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
            className={styles.searchInput}
            type="search"
            name="search"
+           aria-label="Søk etter spill"
            placeholder="Søk etter spill..."
            defaultValue={search ?? ""} 
            />
 
            <select 
            className={styles.filterSelect}
-           name="genre" 
+           name="genre"
+           aria-label="Filtrer etter sjanger"
            defaultValue={genre ?? ""}>
             <option value="">Alle sjangere</option>
             <option value="action">Action</option>
@@ -71,6 +73,7 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
            <select 
            className={styles.filterSelect} 
            name="ordering" 
+           aria-label="Sorter spill"
            defaultValue={ordering ?? ""}>
 
             <option value="">Standard sortering</option>
@@ -89,6 +92,13 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
             Søk
            </button>
         </form>
+        
+        {ordering && (
+            <p className={styles.filterInfo}>
+                Viser kun spill med Metacritic-score når sortering
+                er aktivert.
+            </p>
+        )}
 
         {data.results.length === 0 && (
             <p>Fant ingen spill som matcher søket ditt.</p>
