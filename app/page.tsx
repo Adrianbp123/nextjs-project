@@ -53,7 +53,7 @@ export default async function Home() {
       </section>
 
       <section className={styles.favorites}>
-        <h2>Mine 12 bangers</h2>
+        <h2>UTVALGTE SPILL</h2>
         <p>Håper du har spilt minst en av disse</p>
 
          <GameGrid games={favoriteGames} />

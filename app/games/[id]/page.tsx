@@ -2,6 +2,7 @@ import { fetchGameById } from "@/lib/rawg";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css"
+import FavoriteButton from "@/components/favorites/FavoriteButton";
 
 
 
@@ -35,7 +36,12 @@ export default async function GamePage({ params }: GamePageProps) {
 
     return (
         <main>
+            <div className={styles.titleWrapper}>
             <h1 className={styles.gameTitle}>{game.name}</h1>
+            <div className={styles.favoriteButton}>
+            <FavoriteButton game={game} />
+            </div>
+            </div>
 
         <div className={styles.hero}>
             {game.background_image && (

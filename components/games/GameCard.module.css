@@ -5,6 +5,8 @@
     overflow: hidden;
     transition: transform 0.2s ease,
                 border-color 0.2s ease;
+
+    position: relative;
 }
 
 .card:hover {
@@ -49,5 +51,11 @@
 .rating {
     color: var(--primary-color);
     white-space: nowrap;
-    
+}
+
+.favoritePosition {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
 }
