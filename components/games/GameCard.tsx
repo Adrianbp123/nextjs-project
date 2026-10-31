@@ -34,7 +34,7 @@ export default function GameCard({ game }: GameCardProps) {
             </div>
             </Link>
             <div className={styles.favoritePosition}>
-            <FavoriteButton gameId={game.id} />
+            <FavoriteButton game={game} />
             </div>
         </article>
     );

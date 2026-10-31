@@ -39,7 +39,7 @@ export default async function GamePage({ params }: GamePageProps) {
             <div className={styles.titleWrapper}>
             <h1 className={styles.gameTitle}>{game.name}</h1>
             <div className={styles.favoriteButton}>
-            <FavoriteButton gameId={game.id} />
+            <FavoriteButton game={game} />
             </div>
             </div>
 

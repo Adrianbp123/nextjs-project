@@ -19,6 +19,7 @@ export default function Header () {
             <nav className={styles.nav} aria-label="Hovedmeny">
                 <Link href="/">Forside</Link>
                 <Link href="/games">Spill</Link>
+                <Link href="/favorites">Favoritter</Link>
                 <Link href="/about">Om</Link>
             </nav>
             </div>

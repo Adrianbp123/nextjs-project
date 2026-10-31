@@ -2,32 +2,37 @@
 
 import { useFavoritesStore } from "@/store/useFavoritesStore";
 import styles from "./FavoriteButton.module.css";
+import type { Game } from "@/types/game";
 
 
 type FavoriteButtonProps = {
-    gameId: number;
+    game: Game;
 }
 
 /**
  * Viser en favoritt-knapp som man kan trykke på
  * for å legge til eller fjerne fra favoritter
  * 
- * @param gameId ID-en til spillet
+ * @param game Spillet som skal legges til eller fjernes
  * @returns En favoritt-knapp som viser om spillet er favoritt 
  */
-export default function FavoriteButton({ gameId }: FavoriteButtonProps) {
+export default function FavoriteButton({ game }: FavoriteButtonProps) {
     const favorites = useFavoritesStore((state) => state.favorites);
     const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
 
-    const isFavorite = favorites.includes(gameId);
+    const isFavorite = favorites.some(
+        (favorite) => favorite.id === game.id
+    );
 
     return (
         <button
         type="button"
         className={styles.favoriteButton}
-        onClick={() => toggleFavorite(gameId)}
+        onClick={() => toggleFavorite(game)}
         aria-pressed={isFavorite}
-        aria-label="Favoritt"
+        aria-label={isFavorite ? "Fjern fra favoritter" :
+            "Legg til i favoritter"
+        }
         >
             {isFavorite ? "♥" : "♡"}
         </button>

@@ -1,10 +1,11 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
+import type { Game } from "@/types/game";
 
 
 type FavoritesStore = {
-    favorites: number[];
-    toggleFavorite: (id: number) => void;
+    favorites: Game[];
+    toggleFavorite: (game: Game) => void;
 };
 
 export const useFavoritesStore = create<FavoritesStore>()(
@@ -14,18 +15,22 @@ export const useFavoritesStore = create<FavoritesStore>()(
 
         /**
          * Legger til eller fjerner et spill fra favorittlisten
-         * @param id ID-en til spillet
+         * @param game Spillet som skal legges til eller fjernes
          */
-            toggleFavorite: (id) => {
+            toggleFavorite: (game) => {
                 set((state) => ({
-                    favorites: state.favorites.includes(id)
-                    ? state.favorites.filter((gameId) => gameId !== id)
-                    : [...state.favorites, id],
+                    favorites: state.favorites.some(
+                        (favorite) => favorite.id === game.id
+                    )
+                    ? state.favorites.filter(
+                        (favorite) => favorite.id !== game.id)
+
+                    : [...state.favorites, game],
                 }));
             },
         }),
         {
-            name: "spillcave-favorites"
+            name: "spillcave-favorites-v2"
         }
     )
 )
