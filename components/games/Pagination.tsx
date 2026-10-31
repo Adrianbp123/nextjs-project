@@ -16,7 +16,7 @@ type PaginationProps = {
  * Beholder søk, sjanger og sortering ved sidebytte.
  * 
  * @param props Egenskaper for pagineringen
- * @returns Lenker til forrige og neste side.
+ * @returns JSX med lenker til forrige og neste side.
  */
 
 export default function Pagination({

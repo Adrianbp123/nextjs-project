@@ -15,7 +15,7 @@ type GamePageProps = {
  * Henter og viser informasjon om et bestemt spill.
  * 
  * @param props.params URL-parametere som inneholder spillets ID.
- * @returns En detaljside med informasjon om spillet.
+ * @returns JSX for detaljside med informasjon om spillet.
  */
 export default async function GamePage({ params }: GamePageProps) {
     const { id } = await params;
@@ -53,7 +53,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
         <div className={styles.gameMeta}>
             <span className={styles.rating}>☆ {game.rating} / 5</span>
-            <span className={styles.released}>Released: {game.released}</span>
+            <span className={styles.released}>Utgivelsesdato: {game.released}</span>
         </div>
 
         <div className={styles.genres}>
@@ -63,7 +63,7 @@ export default async function GamePage({ params }: GamePageProps) {
         </div>
 
         <div className={styles.description}>
-            <h2>About the game</h2>
+            <h2>Om spillet</h2>
             <p>{game.description_raw.split("Español")[0]}</p>
             
         </div>

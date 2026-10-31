@@ -15,10 +15,10 @@ type GameGridProps = {
 
 export default function GameGrid({ games }: GameGridProps) {
     return (
-        <section className={styles.gamesGrid}>
+        <div className={styles.gamesGrid}>
            {games.map((game) => (
             <GameCard key={game.id} game={game} />
            ))}
-        </section>
+        </div>
     )
 }
